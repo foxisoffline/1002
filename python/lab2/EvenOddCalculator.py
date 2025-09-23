@@ -32,8 +32,38 @@ import sys
 # you can use sys.argv[1] to get the first input argument.
 # sys.argv[2] is the second argument, etc.
 def EvenOddCalculator():
-     pass
 
-if __name__=='__main__':
-      EvenOddCalculator()
-      
+    error = "Please enter valid integers."
+
+    try:
+
+        if len(sys.argv) != 2:
+            raise ValueError
+
+        value = sorted(list(map(int, sys.argv[1].split(sep=","))),
+                       reverse=True)
+
+        difference = value[0] - value[-1]
+
+        even = [even for even in value if even % 2 == 0]
+        even_sum, even_len = sum(even), len(even)
+
+        odd = [odd for odd in value if odd % 2 != 0]
+        odd_sum, odd_len = sum(odd), len(odd)
+
+        average = int(sum(value[1:-1]) / len(value[1:-1]))
+
+        print(f"The sum of all even numbers is {even_sum}, "
+              f"the sum of all odd numbers is {odd_sum}, "
+              f"the difference between the biggest "
+              f"and smallest number is {difference}, "
+              f"the total number of even numbers is {even_len}, "
+              f"the total number of odd numbers is {odd_len}, "
+              f"the centered average is {average}.")
+
+    except ValueError:
+        print(error)
+
+
+if __name__ == "__main__":
+    EvenOddCalculator()
